@@ -1,0 +1,35 @@
+{
+  "name": "vscode-clangd-api-example",
+  "version": "1.0.0",
+  "description": "Example usage of the vscode-clangd API",
+  "author": "Nathan Ridge",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.65.0"
+  },
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp"
+  ],
+  "main": "./out/bundle",
+  "scripts": {
+    "esbuild": "esbuild ./src/extension.ts --bundle --outfile=out/bundle.js --external:vscode --format=cjs --platform=node",
+    "check-ts": "tsc -noEmit -p ./",
+    "vscode:prepublish": "npm run check-ts && npm run esbuild -- --minify --keep-names",
+    "package": "vsce package --baseImagesUrl https://raw.githubusercontent.com/clangd/vscode-clangd/master/"
+  },
+  "dependencies": {
+    "@clangd/vscode-clangd": "../vscode-clangd/api",
+    "vscode-languageclient": "8.0.2"
+  },
+  "devDependencies": {
+    "@types/vscode": "1.65.0",
+    "esbuild": "^0.14.13",
+    "typescript": "^4.5.5",
+    "vsce": "^2.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HighCommander4/vscode-clangd-api-example.git"
+  }
+}
